@@ -1,7 +1,7 @@
 <?php include("path.php"); ?>
 <?php include("app/controllers/users.php"); 
+$topics = selectAll('topics');
 guestsOnly(); ?>
-
 
 
 <!DOCTYPE html> 
@@ -18,7 +18,7 @@ guestsOnly(); ?>
 
 <body>
     <div id="__next">
-        <?php include("app/includes/header.php"); ?>
+        <?php include(ROOT . "app/includes/header.php"); ?>
 
 
         <div class="flex flex-col text-center justify-center flex-grow mx-auto w-1/4">

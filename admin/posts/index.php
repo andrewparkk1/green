@@ -30,7 +30,7 @@
         <div class="flex flex-row justify-between flex-grow px-10 w-full py-10">
             <?php include(ROOT . "app/includes/adminPages.php"); ?>
 
-            <div class="flex flex-col bg-green-100 w-5/6 p-5">
+            <div class="flex flex-col bg-gray-100 border-black border-2 border-solid w-5/6 p-5">
                 <div class="flex flex-row justify-between">
                     <h1>Manage Posts</h1>
                     <div class="flex flex-row justify-between w-3/12">

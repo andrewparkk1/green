@@ -1,5 +1,6 @@
 <?php
 include("../..path.php");
+
 ?>
 
 <div class="text-center my-10 relative">
