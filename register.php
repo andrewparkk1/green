@@ -1,5 +1,6 @@
 <?php include("path.php"); ?>
 <?php include("app/controllers/users.php");
+$topics = selectAll('topics');
 guestsOnly(); ?>
 
 
@@ -19,9 +20,9 @@ guestsOnly(); ?>
     <div id="__next">
         <?php include(ROOT . "app/includes/header.php"); ?>
 
-        <div class="flex flex-col text-center justify-center flex-grow mx-auto w-1/4">
+        <div class="flex flex-col text-center justify-center flex-grow mx-auto w-1/4 py-20">
             <form action="register.php" method="post"  class="bg-slate-400 border-2 border-black py-5 space-y-5 text-left px-5">
-                <h1 class="font-black text-center">Login</h1>
+                <h1 class="font-black text-center">Register</h1>
 
                 <?php include(ROOT . "app/helpers/formErrors.php"); ?>
 

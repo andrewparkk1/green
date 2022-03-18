@@ -27,7 +27,7 @@ include("../..path.php");
     <a href="multimedia.html" class="hover:text-green-500 font-thin hover:transition-all">MULTIMEDIA</a>
     <a >Editor's Pick</a>
     <a href="fifteen.html" class="hover:text-green-500 font-thin hover:transition-all">15TH GREEN</a> -->
-    <a href="aboutus.html" class="hover:text-green-500 font-thin hover:transition-all">ABOUT US</a> 
+    <a href="aboutus.php" class="hover:text-green-500 font-thin hover:transition-all">ABOUT US</a> 
     <form action="index.php" method="post" class="w-1/12">
         <input type="text" name="search-term" placeholder="Search...">
     </form>
