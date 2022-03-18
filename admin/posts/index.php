@@ -1,5 +1,6 @@
 <?php include("../../path.php"); ?>
 <?php include(ROOT . "app/controllers/posts.php"); ?>
+<?php adminOnly(); ?>
 
 
 <!DOCTYPE html> 
@@ -24,7 +25,7 @@
 
 <body>
     <div id="__next">
-        <?php include(ROOT . "app/includes/header.php"); ?>
+        <?php include(ROOT . "app/includes/adminHeader.php"); ?>
 
         <div class="flex flex-row justify-between flex-grow px-10 w-full py-10">
             <?php include(ROOT . "app/includes/adminPages.php"); ?>
@@ -52,13 +53,13 @@
                                     <td><?php echo $key + 1; ?></td>
                                     <td><?php echo $post['title']; ?></td>
                                     <td><?php echo $post['user_id']; ?></td>
-                                    <td><a href="edit.php?id=<?php echo $topic['id']; ?>">edit</a></td>
-                                    <td><a href="index.php?del_id=<?php echo $topic['id']; ?>">delete</a></td>
+                                    <td><a href="edit.php?id=<?php echo $post['id']; ?>">edit</a></td>
+                                    <td><a href="index.php?delete_id=<?php echo $post['id']; ?>">delete</a></td>
                                     
                                     <?php if ($post['published']): ?>
-                                        <td><a href="#">Unpublish</a></td>
+                                        <td><a href="edit.php?published=0&p_id=<?php echo $post['id']; ?>">Unpublish</a></td>
                                     <?php else: ?>
-                                        <td><a href="#">Publish</a></td>
+                                        <td><a href="edit.php?published=1&p_id=<?php echo $post['id']; ?>">Publish</a></td>
                                     <?php endif; ?>
                                 </tr> 
                             <?php endforeach; ?>

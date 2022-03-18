@@ -1,5 +1,7 @@
 <?php include("../../path.php"); ?>
 <?php include(ROOT . "app/controllers/posts.php"); ?>
+<?php adminOnly(); ?>
+
 
 <!DOCTYPE html> 
 <html lang="en">
@@ -23,7 +25,7 @@
 
 <body>
     <div id="__next">
-        <?php include(ROOT . "app/includes/header.php"); ?>
+        <?php include(ROOT . "app/includes/adminHeader.php"); ?>
 
         <div class="flex flex-row justify-between flex-grow px-10 w-full py-10">
         <?php include(ROOT . "app/includes/adminPages.php"); ?>

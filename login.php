@@ -1,5 +1,7 @@
 <?php include("path.php"); ?>
-<?php include("app/controllers/users.php"); ?>
+<?php include("app/controllers/users.php"); 
+guestsOnly(); ?>
+
 
 
 <!DOCTYPE html> 

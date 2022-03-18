@@ -41,6 +41,30 @@ function selectAll($table, $conditions = []) {
     } 
 }
 
+function selectAllOrdered($table, $col, $conditions = []) {
+    global $conn;
+    $sql = "SELECT * FROM $table ORDER BY $col DESC";
+    if (empty($conditions)) {
+        $stmt = $conn->prepare($sql);
+        $stmt->execute();
+        $records = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+        return $records;
+    } else {
+        $i = 0;   
+        foreach($conditions as $key => $value) {
+            if ($i === 0) {
+                $sql = $sql . " WHERE $key=?";
+            } else {
+                $sql = $sql . " AND $key=?";
+            }  
+            $i++;
+        }
+        $stmt = executeQuery($sql, $conditions);
+        $records = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+        return $records;
+    } 
+}
+
 function selectOne($table, $conditions) {
     global $conn;
     $sql = "SELECT * FROM $table";
@@ -100,6 +124,37 @@ function delete($table, $id) {
     $stmt = executeQuery($sql, ['id' => $id]);
     return $stmt->affected_rows;
 }
+
+function getPublishedPosts() {
+    global $conn;
+    $sql = "SELECT p.*, u.username FROM posts AS p JOIN users AS u ON p.user_id=u.id WHERE published=?";
+    $stmt = executeQuery($sql, ['published' => 1]);
+    $records = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+    return $records;
+}
+
+function getPostsByTopicId($topic_id) {
+    global $conn;
+    $sql = "SELECT p.*, u.username FROM posts AS p JOIN users AS u ON p.user_id=u.id WHERE p.published=? AND topic_id=?";
+    $stmt = executeQuery($sql, ['published' => 1, 'topic_id' => $topic_id]);
+    $records = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+    return $records;
+}
+
+function searchPosts($term) {
+    global $conn;
+    $match = '%' . $term . '%';
+    $sql = "SELECT 
+            p.*, u.username 
+            FROM posts AS p 
+            JOIN users AS u 
+            ON p.user_id=u.id 
+            WHERE published=?
+            AND p.title LIKE ? OR p.body LIKE ?";
+    $stmt = executeQuery($sql, ['published' => 1, 'title' => $match, 'body' => $match]);
+    $records = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+    return $records;
+} 
 
 // $conditions = [
 //     'username' => 'Pa',

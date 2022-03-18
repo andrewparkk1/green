@@ -1,11 +1,26 @@
 <?php 
 include("path.php"); 
-// include(ROOT . "app/database/db.php");
+include(ROOT . "app/controllers/topics.php");
+// $posts = selectAll('posts', ['published' => 1]);
+
+$posts = array();
+$postsTitle = "LATEST";
+$postDescription = "latest creations"; 
+
+if (isset($_GET['t_id'])) {
+    $posts = getPostsByTopicId($_GET['t_id']); 
+    $postsTitle = $_GET['name'];
+} else if (isset($_POST['search-term'])) {
+    $posts = searchPosts($_POST['search-term']);
+} else {
+    $posts = getPublishedPosts();
+}
+
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
-
+ 
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -19,59 +34,30 @@ include("path.php");
     <div id="__next">
         <!-- MAIN CONTAINER -->
             <?php include(ROOT . "app/includes/header.php"); ?>
-            
+
             <div class="flex flex-col flex-grow w-3/4 mx-auto">
+
                 <!-- SECTION HEADER -->
                 <div class="pt-16 pb-10 font-semibold">
-                    <h1 class="text-6xl">LATEST</h1>
-                    <h5 class="text-xl font-semibold">A collection of the latest creations by <span class="font-[Parisienne] italic">the</span> <span class="font-extra-light font-['Julius_Sans_One']">GREEN's</span> editors</h5>
+                <?php include(ROOT . "app/includes/messages.php"); ?>
+                    <h1 class="text-6xl"><?php echo $postsTitle; ?></h1>
+                    <!-- <h5 class="text-xl font-semibold">A collection of the latest creations by <span class="font-[Parisienne] italic">the</span> <span class="font-extra-light font-['Julius_Sans_One']">GREEN's</span> editors</h5> -->
                 </div>
 
+
                 <!-- WRITING CONTAINER -->
-                <div class="box-border grid grid-cols-2 auto-rows-[17rem] gap-8">
-                    <div>
-                        <a href="https://medium.com/@nathanhogg1223/review-zebra-g-series-f474518a5b63">
-                            <!-- <img src="images/penny.jpeg" class="w-full h-full object-cover"> -->
-                            <div class="hover:text-green-300 flex flex-col py-6 px-5 text-white drop-shadow-2xl bg-cover object-cover w-full h-full font-thin" style="background-image: url(assets/images/books.jpeg);">
-                                <p>Nathan Hogg</p>
-                                <p>Jan 2, 2022</p>
-                                <h1 class="mt-auto text-2xl">Review: Zebra G Series</h1>
-                            </div>
-                        </a>
-                    </div>
-
-                    <div>
-                        <a href="articles/empire.html">
-                            <!-- <img src="images/penny.jpeg" class="w-full h-full object-cover"> -->
-                            <div class="hover:text-green-300 flex flex-col py-6 px-5 text-white drop-shadow-2xl bg-cover object-cover w-full h-full font-thin" style="background-image: url(assets/images/photo-1553272725-086100aecf5e.jpeg); ">
-                                <p>Isabel Ocegueda</p>
-                                <p>Jan 22, 2022</p>
-                                <h1 class="mt-auto text-2xl">Empire</h1>
-                            </div>
-                        </a>
-                    </div>
-
-                    <div>
-                        <a href="articles/empire.html">
-                            <!-- <img src="images/penny.jpeg" class="w-full h-full object-cover"> -->
-                            <div class="hover:text-green-300 flex flex-col py-6 px-5 text-white drop-shadow-2xl bg-cover object-cover w-full h-full font-thin" style="background-image: url(assets/images/photo-1643400811590-adfc89411a30.jpeg); ">
-                                <p>Isabel Ocegueda</p>
-                                <p>Jan 22, 2022</p>
-                                <h1 class="mt-auto text-2xl">Empire</h1>
-                            </div>
-                        </a>
-                    </div>
-
-                    <div>
-                        <a href="articles/empire.html">
-                            <!-- <img src="images/penny.jpeg" class="w-full h-full object-cover"> -->
-                            <div class="hover:text-green-300 flex flex-col py-6 px-5 text-white drop-shadow-2xl bg-cover object-cover w-full h-full font-thin" style="background-image: url(assets/images/bunch.jpeg); ">
-                                <p>Isabel Ocegueda</p>
-                                <p>Jan 22, 2022</p>
-                                <h1 class="mt-auto text-2xl">Empire</h1>
-                            </div>
-                        </a>
-                    </div>
+                <div class="box-border grid grid-cols-2 auto-rows-[50rem] gap-8">
+                    <?php foreach($posts as $post): ?>
+                        <div>
+                            <a href="single.php?id=<?php echo $post['id']; ?>&username=<?php echo $post['username']; ?>">
+                                <div class="hover:text-green-300 flex flex-col py-6 px-5 text-red-500 drop-shadow-2xl bg-cover object-cover w-full h-full font-thin" style="background-image: url(<?php echo BASE . 'assets/images/' . $post['image']; ?>);">
+                                    <p><?php echo $post['username']; ?></p>
+                                    <p><?php echo date('F j, Y', strtotime($post['created_at'])); ?></p>
+                                    <h1 class="mt-auto text-2xl"><?php echo $post['title']; ?></h1>
+                                </div>
+                            </a>
+                        </div>
+                    <?php endforeach; ?>
                 </div>
 
             </div>

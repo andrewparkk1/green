@@ -1,5 +1,6 @@
 <?php include("../../path.php"); ?>
 <?php include(ROOT . "app/controllers/users.php"); ?>
+<?php adminOnly(); ?>
 
 
 <!DOCTYPE html> 
@@ -24,7 +25,7 @@
 
 <body>
     <div id="__next">
-        <?php include(ROOT . "app/includes/header.php"); ?>
+        <?php include(ROOT . "app/includes/adminHeader.php"); ?>
 
         <div class="flex flex-row justify-between flex-grow px-10 w-full py-10">
             <?php include(ROOT . "app/includes/adminPages.php"); ?>
@@ -37,30 +38,31 @@
                         <a href="index.php">Manage Users</a>
                     </div>
                 </div>
+                <?php include(ROOT . "app/includes/messages.php"); ?>
+
 
                 <div class="p-5 text-left">
                     <table class="w-full border-collapse">
                         <thead>
                             <th>ID</th>
+                            <th>Admin</th>
                             <th>Username</th>
-                            <th>Role</th>
+                            <th>Email</th>
                             <th colspan="2">Action</th>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>Andrew</td>
-                                <td>Admin</td>
-                                <td><a href="#">edit</a></td>
-                                <td><a href="#">delete</a></td>
-                            </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>Bob</td>
-                                <td>Editor</td>
-                                <td><a href="#">edit</a></td>
-                                <td><a href="#">delete</a></td>
-                            </tr>
+
+                            <?php foreach($all_users as $key => $user): ?>
+                                <tr>
+                                    <td><?php echo $key + 1; ?></td>
+                                    <td><?php echo $user['admin']; ?></td>
+                                    <td><?php echo $user['username']; ?></td>
+                                    <td><?php echo $user['email']; ?></td>
+                                    <td><a href="edit.php?id=<?php echo $user['id']; ?>">edit</a></td>
+                                    <td><a href="index.php?delete_id=<?php echo $user['id']; ?>">delete</a></td>
+                                </tr>
+                            <?php endforeach; ?>
+
                         </tbody>
                     </table>
                 </div>

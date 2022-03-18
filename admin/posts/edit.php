@@ -1,5 +1,6 @@
 <?php include("../../path.php"); ?>
 <?php include(ROOT . "app/controllers/posts.php"); ?>
+<?php adminOnly(); ?>
 
 
 <!DOCTYPE html> 
@@ -23,7 +24,7 @@
 
 <body>
     <div id="__next">
-        <?php include(ROOT . "app/includes/header.php"); ?>
+        <?php include(ROOT . "app/includes/adminHeader.php"); ?>
 
         <div class="flex flex-row justify-between flex-grow px-10 w-full py-10">
         <?php include(ROOT . "app/includes/adminPages.php"); ?>
@@ -35,44 +36,45 @@
                         <a href="index.php">Manage Topics</a>
                     </div>
                 </div>
- 
-                <form action="edit.php" method="post" class="py-5 space-y-5">
-                    <div>
-                        <label for="title">Name</label><br>
-                        <input type="text" name="name" value="<?php echo $name; ?>">
-                    </div>
-                    <div>
-                        <label for="body">Description</label>
-                        <textarea name="description" id="editor"><?php echo $description; ?></textarea>
-                    </div>
-                    <div>
-                        <button type="submit" name="update-topic">Update Topic</button>
-                    </div>
-                </form>
 
-                <form action="edit.php" method="post" class="py-5 space-y-5">
-                <input type="hidden" name="id" value="<?php echo $id; ?>">
+                <?php include(ROOT . "app/helpers/formErrors.php"); ?>
+
+                <form action="edit.php" method="post" class="py-5 space-y-5" enctype="multipart/form-data">
+                    <input type="hidden" name="id" value="<?php echo $id; ?>">
                     <div>
                         <label for="title">Title</label><br>
-                        <input type="text" name="title">
+                        <input type="text" name="title" value="<?php echo $title; ?>">
                     </div>
                     <div>
-                        <label for="body">Body</label>
-                        <textarea name="body" id="editor"></textarea>
+                        <label for="body">Body</label> 
+                        <textarea name="body" id="editor"><?php echo $body; ?></textarea>
                     </div>
                     <div>
                         <label for="image">Image</label><br>
                         <input type="file" name="image">
                     </div>
                     <div>
-                        <label for="topic">Topic</label><br>
-                        <select name="topic">
-                            <option value="Opinion">Opinion</option>
-                            <option value="Creative-Writing">Creative Writing</option>
+                        <label for="topic_id">Topic</label><br>
+                        <select name="topic_id">
+                            <option value=""></option>
+                                <?php foreach($topics as $key => $topic): ?>
+                                    <?php if (!empty($topic_id) && $topic_id == $topic['id']): ?>
+                                        <option selected value="<?php echo $topic['id']; ?>"><?php echo $topic['name']; ?></option>
+                                    <?php else: ?>
+                                        <option value="<?php echo $topic['id']; ?>"><?php echo $topic['name']; ?></option>
+                                    <?php endif; ?>
+                                <?php endforeach; ?>
                         </select>
                     </div>
                     <div>
-                        <button type="submit">Add Post</button>
+                        <?php if (empty($published) && $published === 0): ?>
+                            <label><input type="checkbox" name="published">Publish</label>
+                        <?php else: ?>
+                            <label><input type="checkbox" name="published" checked>Publish</label>
+                        <?php endif; ?>
+                    </div>
+                    <div>
+                        <button type="submit" name="update-post">Update Post</button>
                     </div>
                 </form>
 
