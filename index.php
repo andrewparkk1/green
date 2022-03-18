@@ -34,8 +34,7 @@ if (isset($_GET['t_id'])) {
     <div id="__next">
         <!-- MAIN CONTAINER -->
             <?php include(ROOT . "app/includes/header.php"); ?>
-
-            <div class="flex flex-col flex-grow w-3/4 mx-auto">
+            <div class="flex flex-col flex-grow w-7/12 mx-auto pb-16">
 
                 <!-- SECTION HEADER -->
                 <div class="pt-16 pb-10 font-semibold">
@@ -46,11 +45,11 @@ if (isset($_GET['t_id'])) {
 
 
                 <!-- WRITING CONTAINER -->
-                <div class="box-border grid grid-cols-2 auto-rows-[50rem] gap-8">
+                <div class="box-border grid grid-cols-2 gap-8" style="grid-auto-rows: 16rem;" >
                     <?php foreach($posts as $post): ?>
                         <div>
                             <a href="single.php?id=<?php echo $post['id']; ?>&username=<?php echo $post['username']; ?>">
-                                <div class="hover:text-green-300 flex flex-col py-6 px-5 text-red-500 drop-shadow-2xl bg-cover object-cover w-full h-full font-thin" style="background-image: url(<?php echo BASE . 'assets/images/' . $post['image']; ?>);">
+                                <div class="hover:text-green-500 flex flex-col py-6 px-5 text-white drop-shadow-2xl bg-cover object-cover w-full h-full font-thin" style="background-image: url(<?php echo BASE . 'assets/images/' . $post['image']; ?>);">
                                     <p><?php echo $post['username']; ?></p>
                                     <p><?php echo date('F j, Y', strtotime($post['created_at'])); ?></p>
                                     <h1 class="mt-auto text-2xl"><?php echo $post['title']; ?></h1>
