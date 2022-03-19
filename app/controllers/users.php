@@ -37,7 +37,7 @@ if (isset($_POST['register-btn']) || isset($_POST['create-admin'])) {
 
     if (count($errors) === 0) {
         unset($_POST['register-btn'], $_POST['passwordConf'], $_POST['create-admin']);
-        // $_POST['password'] = password_hash($POST['password'], PASSWORD_DEFAULT);
+        $_POST['password'] = password_hash($_POST['password'], PASSWORD_DEFAULT);
 
         if (isset($_POST['admin'])) {
             $_POST['admin'] = 1;
@@ -66,8 +66,8 @@ if (isset($_POST['login-btn'])) {
     if (count($errors) === 0) {
         $user = selectOne($table, ['username' => $_POST['username']]);
 
-        // if (password_verify($_POST['password'], $user['password'])) {
-        if (isset($user) && $_POST['password'] === $user['password']) {
+        if (isset($user) && password_verify($_POST['password'], $user['password'])) {
+        // if (isset($user) && $_POST['password'] === $user['password']) {
             loginUser($user);
         } else {
             array_push($errors, "Wrong credentials");
@@ -102,7 +102,7 @@ if (isset($_POST['update-user'])) {
     if (count($errors) === 0) {
         $id = $_POST['id'];
         unset($_POST['passwordConf'], $_POST['update-user'], $_POST['id']);
-        // $_POST['password'] = password_hash($POST['password'], PASSWORD_DEFAULT);
+        $_POST['password'] = password_hash($_POST['password'], PASSWORD_DEFAULT);
         $user = selectOne($table, ['id' => $id]);
         $_POST['admin'] = isset($user['admin']) ? 1 : 0;
         $user_id = update($table, $id, $_POST);
