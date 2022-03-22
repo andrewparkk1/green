@@ -15,33 +15,24 @@ include(ROOT . "app/controllers/topics.php");
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>The Green</title>
-    <link rel="stylesheet" href="../../assets/css/tailwind.css">
     <link href="https://unpkg.com/tailwindcss@^2.0/dist/tailwind.min.css" rel="stylesheet">
-    <style>
-        th, td {
-            padding: 15px;
-            text-align: left; 
-            border-bottom: 1px solid #d3d3d3;
-        }
-    </style>
+    <link rel="stylesheet" href="../../assets/css/tailwind.css">
+
 </head>
 
 <body>
     <div id="__next">
         <?php include(ROOT . "app/includes/adminHeader.php"); ?>
 
-        <div class="flex flex-row justify-between flex-grow px-10 w-full py-10">
+        <div class="flex flex-row justify-between flex-grow w-full">
         <?php include(ROOT . "app/includes/adminPages.php"); ?>
-            <div class="flex flex-col bg-green-100 w-5/6 p-5">
-                <div class="flex flex-row justify-between">
+            <div class="flex flex-col bg-gray-100 border-black border-2 border-solid w-5/6 p-8 ">
+                <div class="flex flex-row justify-between px-5">
                     <h1>Create Topic</h1>
-                    <div class="flex flex-row justify-between w-3/12">
-                        <a href="create.php">Create Topic</a>
-                        <a href="index.php">Manage Topics</a>
-                    </div>
+                    <?php include(ROOT . "app/includes/adminTopics.php"); ?>
                 </div>
 
-                <form action="create.php" method="post" class="py-5 space-y-5">
+                <form action="create.php" method="post" class="p-5 space-y-5">
                     <div>
                         <label for="title">Name</label><br>
                         <input type="text" name="name">

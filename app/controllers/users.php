@@ -38,7 +38,6 @@ if (isset($_POST['register-btn']) || isset($_POST['create-admin'])) {
     if (count($errors) === 0) {
         unset($_POST['register-btn'], $_POST['passwordConf'], $_POST['create-admin']);
         $_POST['password'] = password_hash($_POST['password'], PASSWORD_DEFAULT);
-
         if (isset($_POST['admin'])) {
             $_POST['admin'] = 1;
             $user_id = create($table, $_POST);
@@ -65,7 +64,6 @@ if (isset($_POST['login-btn'])) {
 
     if (count($errors) === 0) {
         $user = selectOne($table, ['username' => $_POST['username']]);
-
         if (isset($user) && password_verify($_POST['password'], $user['password'])) {
         // if (isset($user) && $_POST['password'] === $user['password']) {
             loginUser($user);

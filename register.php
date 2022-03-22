@@ -11,9 +11,10 @@ guestsOnly(); ?>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Green</title>
-    <link rel="stylesheet" href="assets/css/tailwind.css">
+    <title>Register | The Green</title>
     <link href="https://unpkg.com/tailwindcss@^2.0/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/tailwind.css">
+
 </head>
 
 <body>
@@ -22,7 +23,7 @@ guestsOnly(); ?>
 
         <div class="flex flex-col text-center justify-center flex-grow mx-auto w-1/4 py-20">
             <form action="register.php" method="post"  class="bg-slate-400 border-2 border-black py-5 space-y-5 text-left px-5">
-                <h1 class="font-black text-center">Register</h1>
+                <h1 class="text-center">Register</h1>
 
                 <?php include(ROOT . "app/helpers/formErrors.php"); ?>
 
@@ -44,7 +45,7 @@ guestsOnly(); ?>
                 </div>
 
                 <button type="submit" name="register-btn" class="border-2 border-black bg-black-300 p-2">Register</button>
-                <p class="text-center">Or <a href="login.php">Log In</a></p>
+                <p class="text-center">Or <a class="underline underline-offset-4 hover:text-gray-500" href="login.php">Log In</a></p>
             </form>
         </div>
 

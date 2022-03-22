@@ -14,32 +14,23 @@ include(ROOT . "app/controllers/topics.php");
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>The Green</title>
-    <link rel="stylesheet" href="../../assets/css/tailwind.css">
     <link href="https://unpkg.com/tailwindcss@^2.0/dist/tailwind.min.css" rel="stylesheet">
-    <style>
+    <link rel="stylesheet" href="../../assets/css/tailwind.css">
 
-        th, td {
-            padding: 15px;
-            text-align: left; 
-            border-bottom: 1px solid #d3d3d3;
-        }
-    </style>
 </head>
 
 <body>
     <div id="__next">
     <?php include(ROOT . "app/includes/adminHeader.php"); ?>
 
-        <div class="flex flex-row justify-between flex-grow px-10 w-full py-10">
+        <div class="flex flex-row justify-between flex-grow w-full">
             <?php include(ROOT . "app/includes/adminPages.php"); ?>
 
-            <div class="flex flex-col bg-green-100 w-5/6 p-5">
-                <div class="flex flex-row justify-between">
+            <div class="flex flex-col bg-gray-100 border-black border-2 border-solid w-5/6 p-8 ">
+                <div class="flex flex-row justify-between px-5">
                     <h1>Manage Topics</h1>
-                    <div class="flex flex-row justify-between w-3/12">
-                        <a href="create.php">Create Topic</a>
-                        <a href="index.php">Manage Topics</a>
-                    </div>
+                    <?php include(ROOT . "app/includes/adminTopics.php"); ?>
+
                 </div>
                 <?php include(ROOT . "app/includes/messages.php"); ?>
                 <div class="p-5 text-left">
@@ -56,8 +47,8 @@ include(ROOT . "app/controllers/topics.php");
                                     <td><?php echo $key + 1; ?></td>
                                     <td><?php echo $topic['name']; ?></td>
                                     <td><?php echo $topic['description']; ?></td>
-                                    <td><a href="edit.php?id=<?php echo $topic['id']; ?>">edit</a></td>
-                                    <td><a href="index.php?del_id=<?php echo $topic['id']; ?>">delete</a></td>
+                                    <td><a class="text-green-500 hover:text-green-700" href="edit.php?id=<?php echo $topic['id']; ?>">Edit</a></td>
+                                    <td><a class="text-red-500 hover:text-red-700" href="index.php?del_id=<?php echo $topic['id']; ?>">Delete</a></td>
                                 </tr>
                             <?php endforeach; ?>
                         </tbody>

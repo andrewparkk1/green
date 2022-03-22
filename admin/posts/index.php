@@ -11,32 +11,22 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>The Green</title>
-    <link rel="stylesheet" href="../../assets/css/tailwind.css">
     <link href="https://unpkg.com/tailwindcss@^2.0/dist/tailwind.min.css" rel="stylesheet">
-    <style>
+    <link rel="stylesheet" href="../../assets/css/tailwind.css">
 
-        th, td {
-            padding: 15px;
-            text-align: left; 
-            border-bottom: 1px solid #d3d3d3;
-        }
-    </style>
 </head>
 
 <body>
     <div id="__next">
         <?php include(ROOT . "app/includes/adminHeader.php"); ?>
 
-        <div class="flex flex-row justify-between flex-grow px-10 w-full py-10">
+        <div class="flex flex-row justify-between flex-grow w-full">
             <?php include(ROOT . "app/includes/adminPages.php"); ?>
 
-            <div class="flex flex-col bg-gray-100 border-black border-2 border-solid w-5/6 p-5">
-                <div class="flex flex-row justify-between">
+            <div class="flex flex-col bg-gray-100 border-black border-2 border-solid w-5/6 p-8 ">
+                <div class="flex flex-row justify-between px-5">
                     <h1>Manage Posts</h1>
-                    <div class="flex flex-row justify-between w-3/12">
-                        <a href="create.php">Create Post</a>
-                        <a href="index.php">Manage Posts</a>
-                    </div>
+                    <?php include(ROOT . "app/includes/adminPosts.php"); ?>
                 </div>
                 <?php include(ROOT . "app/includes/messages.php"); ?>
                 <div class="p-5 text-left">
@@ -52,12 +42,11 @@
                                 <tr>
                                     <td><?php echo $key + 1; ?></td>
                                     <td><?php echo $post['title']; ?></td>
-                                    <td><?php echo $post['user_id']; ?></td>
-                                    <td><a href="edit.php?id=<?php echo $post['id']; ?>">edit</a></td>
-                                    <td><a href="index.php?delete_id=<?php echo $post['id']; ?>">delete</a></td>
-                                    
+                                    <td><?php echo getUsername($post['id']); ?></td>
+                                    <td><a class="text-green-500 hover:text-green-700" href="edit.php?id=<?php echo $post['id']; ?>">Edit</a></td>
+                                    <td><a class="text-red-500 hover:text-red-700" href="index.php?delete_id=<?php echo $post['id']; ?>">Delete</a></td>
                                     <?php if ($post['published']): ?>
-                                        <td><a href="edit.php?published=0&p_id=<?php echo $post['id']; ?>">Unpublish</a></td>
+                                        <td><a class="text-yellow-500 hover:text-yellow-700" href="edit.php?published=0&p_id=<?php echo $post['id']; ?>">Unpublish</a></td>
                                     <?php else: ?>
                                         <td><a href="edit.php?published=1&p_id=<?php echo $post['id']; ?>">Publish</a></td>
                                     <?php endif; ?>

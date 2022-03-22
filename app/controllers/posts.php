@@ -114,7 +114,12 @@ if(isset($_POST['update-post'])) {
         $topic_id = $_POST['topic_id'];
         $published = isset($_POST['published']) ? 1 : 0;
     }
-    
+}
+
+function getUsername($post_id) {
+    $post = selectOne('posts', ['id' => $post_id]);
+    $user = selectOne('users', ['id' => $post['user_id']]);
+    return $user['username'];
 }
 
 

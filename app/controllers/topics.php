@@ -52,4 +52,9 @@ if (isset($_GET['del_id'])) {
     exit();
 }
 
+function getTopicDescription($topic_id) {
+    $topic = selectOne('topics', ['id' => $topic_id]);
+    return $topic['description'];
+}
+
 ?>
