@@ -6,7 +6,7 @@ include(ROOT . "app/helpers/middleware.php");
 
 $table = 'posts';
 $topics = selectAll('topics');
-$posts = selectAll($table);
+$posts = selectAllOrdered($table, 'id');
 $errors = array();
 
 $id = '';
@@ -14,7 +14,7 @@ $title = '';
 $body = '';
 $topic_id = '';
 $published = '';
-// $image_name = '';
+$image_name = '';
 
 if (isset($_GET['id'])) {
     $post = selectOne($table, ['id' => $_GET['id']]);
@@ -43,7 +43,7 @@ if (isset($_GET['published']) && isset($_GET['p_id'])) {
 }
 
 if(isset($_POST['add-post'])) {
-    adminOnly();
+    usersOnly();
     $errors = validatePost($_POST);
 
     if (!empty($_FILES['image']['name'])) {
@@ -63,7 +63,7 @@ if(isset($_POST['add-post'])) {
         unset($_POST['add-post']);
         $_POST['user_id'] = $_SESSION['id'];
         $_POST['published'] = isset($_POST['published']) ? 1 : 0;
-        $_POST['body'] = htmlentities($_POST['body']);
+        // $_POST['body'] = htmlentities($_POST['body']);
 
         $post_id = create($table, $_POST);
         dd($post_id);
@@ -80,8 +80,7 @@ if(isset($_POST['add-post'])) {
 
 
 if(isset($_POST['update-post'])) {
-    adminOnly();
-
+    // adminOnly();
     $errors = validatePost($_POST);
 
     if (!empty($_FILES['image']['name'])) {
@@ -120,6 +119,12 @@ function getUsername($post_id) {
     $post = selectOne('posts', ['id' => $post_id]);
     $user = selectOne('users', ['id' => $post['user_id']]);
     return $user['username'];
+}
+
+function getUserId($post_id) {
+    $post = selectOne('posts', ['id' => $post_id]);
+    $user = selectOne('users', ['id' => $post['user_id']]);
+    return $user['id'];
 }
 
 

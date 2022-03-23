@@ -2,7 +2,7 @@
 include("../../path.php"); 
 include(ROOT . "app/controllers/topics.php");
 ?>
-<?php adminOnly(); ?>
+<?php usersOnly(); ?>
 
 
 

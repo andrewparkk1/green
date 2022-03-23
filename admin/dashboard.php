@@ -1,6 +1,6 @@
 <?php include("../path.php"); ?>
 <?php include(ROOT . "app/controllers/posts.php"); ?>
-<?php adminOnly(); ?>
+<?php usersOnly(); ?>
 
 
 <!DOCTYPE html> 

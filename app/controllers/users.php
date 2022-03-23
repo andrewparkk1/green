@@ -23,12 +23,13 @@ function loginUser($user) {
     $_SESSION['admin'] = $user['admin'];
     $_SESSION['message'] = 'You are logged in';
     $_SESSION['type'] = 'Success';
-    
-    if($_SESSION['admin']) {
-        header('location: ' . BASE . 'admin/dashboard.php');
-    } else {
-        header('location: ' . BASE . 'index.php');
-    }
+    header('location: ' . BASE . 'admin/dashboard.php');
+
+    // if($_SESSION['admin'] ) {
+    //     header('location: ' . BASE . 'admin/dashboard.php');
+    // } else {
+    //     header('location: ' . BASE . 'index.php');
+    // }
     exit();
 }
 

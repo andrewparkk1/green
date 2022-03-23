@@ -39,13 +39,13 @@ th, td {
     border-bottom: 1px solid #d3d3d3;
 }
 
-input {
-    width: full;
-}
-
 h1 {
     font-size: 33px;
     font-weight: bold;
+}
+
+input {
+    width: 300px;
 }
 
 

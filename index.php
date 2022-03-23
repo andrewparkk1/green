@@ -64,7 +64,7 @@ if (isset($_GET['t_id'])) {
                 <div class="box-border grid grid-cols-2 gap-8" style="grid-auto-rows: 16rem;" >
                     <?php foreach($posts as $post): ?>
                         <div>
-                            <a href="single.php?id=<?php echo $post['id']; ?>&username=<?php echo $post['username']; ?>">
+                            <a href="<?php echo $post['body']; ?>">
                                 <div class="hover:text-black flex flex-col py-6 px-5 text-white drop-shadow-2xl bg-cover object-cover w-full h-full font-thin" style="background-image: url(<?php echo BASE . 'assets/images/' . $post['image']; ?>);">
                                     <p><?php echo $post['username']; ?></p>
                                     <p><?php echo date('F j, Y', strtotime($post['created_at'])); ?></p>

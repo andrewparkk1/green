@@ -35,7 +35,7 @@
                         <input type="text" name="name" value="<?php echo $name; ?>">
                     </div>
                     <div>
-                        <label for="body">Description</label>
+                        <label for="body">Description</label><br>
                         <textarea name="description" id="editor"><?php echo $description; ?></textarea>
                     </div>
                     <div>

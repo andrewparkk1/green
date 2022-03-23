@@ -1,7 +1,20 @@
 <?php include("../../path.php"); ?>
 <?php include(ROOT . "app/controllers/posts.php"); ?>
-<?php adminOnly(); ?>
+<?php 
 
+    // print " they are equal";
+    // print " the author id is: " . getUserId($_GET['id']);
+    // print " the session id is: " . $_SESSION['id']; 
+usersOnly();
+if ($_SESSION['id'] != getUserId($_GET['id'])) {
+    if ($_SESSION['admin'] != 1) {
+        $_SESSION['message'] = 'You are not the original author';
+        header('location: ' . 'index.php');
+        exit(0);
+    }
+}
+
+?>
 
 <!DOCTYPE html> 
 <html lang="en">
@@ -36,8 +49,8 @@
                         <input type="text" name="title" value="<?php echo $title; ?>">
                     </div>
                     <div>
-                        <label for="body">Body</label> 
-                        <textarea name="body" id="editor"><?php echo $body; ?></textarea>
+                        <label for="body">URL</label><br>
+                        <input type="text" name="body" value="<?php echo $body; ?>">
                     </div>
                     <div>
                         <label for="image">Image</label><br>

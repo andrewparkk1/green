@@ -1,6 +1,16 @@
 <?php include("../../path.php"); ?>
 <?php include(ROOT . "app/controllers/users.php"); ?>
-<?php adminOnly(); ?>
+<?php 
+usersOnly();
+if ($_GET['id'] != $_SESSION['id']) {
+    if ($_SESSION['admin'] != 1) {
+        $_SESSION['message'] = 'You are not this person';
+        header('location: ' . 'index.php');
+        exit(0);
+    }
+}
+
+?>
 
 
 <!DOCTYPE html> 

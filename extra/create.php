@@ -1,6 +1,6 @@
 <?php include("../../path.php"); ?>
 <?php include(ROOT . "app/controllers/posts.php"); ?>
-<?php usersOnly(); ?>
+<?php adminOnly(); ?>
 
 
 <!DOCTYPE html> 
@@ -13,12 +13,7 @@
     <title>The Green</title>
     <link href="https://unpkg.com/tailwindcss@^2.0/dist/tailwind.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../../assets/css/tailwind.css">
-    <!-- <style>
-        input {
-            /* width: full; */
-            width: 500px;
-        }
-    </style> -->
+
 </head>
 
 <body>
@@ -41,8 +36,8 @@
                         <input type="text" name="title" value="<?php echo $title; ?>">
                     </div>
                     <div>
-                        <label for="body">URL</label> <br>
-                        <input type="text" name="body" value="<?php echo $body; ?>">
+                        <label for="body">Body</label> 
+                        <textarea name="body" id="editor"><?php echo $body; ?></textarea>
                     </div>
                     <div>
                         <label for="image">Image</label><br>
@@ -59,6 +54,8 @@
                                         <option value="<?php echo $topic['id']; ?>"><?php echo $topic['name']; ?></option>
                                     <?php endif; ?>
                                 <?php endforeach; ?>
+                            <!-- <option value="Opinion">Opinion</option>
+                            <option value="Creative-Writing">Creative Writing</option> -->
                         </select>
                     </div>
                     <div>
@@ -72,6 +69,9 @@
                         <button type="submit" name="add-post">Add Post</button>
                     </div>
                 </form>
+
+
+
             </div>
         </div> 
 
@@ -80,18 +80,27 @@
     </div>
 
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        
         <script src="https://cdn.ckeditor.com/ckeditor5/33.0.0/classic/ckeditor.js"></script>
+
         <script src="../../assets/js/scripts.js"></script>
-
-        <script>
-            ClassicEditor
-                .create(document.querySelector('#editor'))
-                .catch(error => {
-                    console.log(error);
-                });
-        </script>
-
     
 </body>
 
 </html>
+
+
+<a href="single.php?id=<?php echo $post['id']; ?>&username=<?php echo $post['username']; ?>">
+
+
+<!-- about page -->
+<?php foreach($admin_users as $u): ?>
+                    <div class="flex flex-col text-center justify-center space-y-4">
+                        <img src="assets/images/1647533896_park, andrew.jpg" alt="" style="width: 223px; height: 223px; object-fit: cover; border-radius: 50%;" class="block mx-auto">
+                        <h1><?php echo $u['username']; ?></h1>
+                        <a href="https://www.linkedin.com/in/andrew-park-9508b8202/" target="_blank">
+                            <svg  class="block mx-auto" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-linkedin"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+                        </a>
+                        <p>Andrew Park is the editor-in-chief of the Green. He creates videos and blog pieces. His academic interests are computer science and business. </p>
+                    </div>
+                <?php endforeach; ?>
