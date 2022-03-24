@@ -76,7 +76,7 @@ if ($_SESSION['id'] != getUserId($_GET['id'])) {
                     </div>
                     <div>
                         <?php if (empty($published) && $published === 0): ?>
-                            <label><input type="checkbox" name="published">Publish</label>
+                            <label><input type="checkbox" name="published" class="px-5">Publish</label>
                         <?php else: ?>
                             <label><input type="checkbox" name="published" checked>Publish</label>
                         <?php endif; ?>
